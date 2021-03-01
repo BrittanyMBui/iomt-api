@@ -8,8 +8,8 @@ const usersController = require('./controllers/usersController');
 const PORT = process.env.PORT || 4000;
 const app = express();
 
-// MIDDLEWARE
 
+////////////////////// MIDDLEWARE
 // CORS
 app.use(cors())
 // BODY-PARSER
@@ -24,10 +24,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7 * 4,
     },
 }));
-
-
-
-
+//////////////////////////////////
 
 
 // HOME ROUTE
