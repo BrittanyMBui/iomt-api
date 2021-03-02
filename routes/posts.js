@@ -9,5 +9,7 @@ router.post('/', controllers.posts.create)
 router.get('/:postid', controllers.posts.show)
 // EDIT
 router.put('/:postid', controllers.posts.edit)
+// DELETE
+router.delete('/:postid', controllers.posts.destroy)
 
 module.exports = router;

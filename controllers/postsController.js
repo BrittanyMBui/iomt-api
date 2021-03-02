@@ -60,8 +60,26 @@ const edit = (req, res) => {
 
 // Delete Post
 const destroy = (req, res) => {
-
-}
+    const postId = req.params.postid;
+    const userId = req.body.userid;
+    db.Post.findByIdAndDelete(postId, (err, deletedPost) => {
+        if (err) {
+            return console.log(err)
+        }
+        db.User.findByIdAndUpdate(
+            userId, 
+            { $pull: 
+                { posts: deletedPost._id}
+            }, 
+            { new: true }, 
+            (err, updatedUser) => {
+                if (err) {
+                    return console.log(err)
+                }
+        })
+        res.json(deletedPost)
+    })
+};
 
 
 
