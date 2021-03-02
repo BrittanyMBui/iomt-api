@@ -4,7 +4,8 @@ require('./models');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
-const usersController = require('./controllers/usersController');
+const controllers = require('./controllers');
+const routes = require('./routes');
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -12,7 +13,7 @@ const app = express();
 
 ////////////////////// MIDDLEWARE
 // CORS
-app.use(cors())
+app.use(cors());
 // BODY-PARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,17 +26,18 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7 * 4,
     },
 }));
-// CONTROLLERS
-app.use('/user', usersController);
+// ROUTES
+app.use('/users', routes.users);
+app.use('/posts', routes.posts);
 //////////////////////////////////
 
 
 // HOME ROUTE
 app.get('/', (req, res) => {
     res.send('<h1>IOMT</h1>')
-})
+});
 
 
 app.listen(PORT, () => {
     console.log(`Local host hella listening at ${PORT} deadass`);
-})
+});

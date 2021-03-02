@@ -1,15 +1,13 @@
-const router = require('express').Router();
 const db = require('../models');
-const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 
-// - /user
+// - /users
 
 // USER SIGN-UP
-router.post('/signup', (req, res) => {
+const signup = (req, res) => {
     bcrypt.genSalt(10, (err, salt) => {
         if (err) {
-            console.log(err);
+            return console.log(err);
         }
 
         bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
@@ -22,18 +20,18 @@ router.post('/signup', (req, res) => {
 
             db.User.create(newUser, (err, createdUser) => {
                 if (err) throw err;
-                req.session.user = createdUser;
+                // req.session.user = createdUser;
                 res.json(createdUser);
             })
         })
     })
-});
+};
 
 // USER LOGIN
-router.post('/login', (req, res) => {
+const login = (req, res) => {
     db.User.findOne( { email: req.body.email }, (err, foundUser) => {
         if (err) {
-            console.log(err)
+            return console.log(err)
         }
 
         if (!foundUser) {
@@ -46,14 +44,17 @@ router.post('/login', (req, res) => {
             }
 
             if (result) {
-                req.session.user = foundUser;
+                // req.session.user = foundUser;
                 res.json(foundUser);
             } else {
                 res.send('invalid password');
             }
         })
     })
-})
+};
 
 
-module.exports = router;
+module.exports = {
+    signup,
+    login
+};
