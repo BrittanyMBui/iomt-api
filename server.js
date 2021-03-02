@@ -25,6 +25,8 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24 * 7 * 4,
     },
 }));
+// CONTROLLERS
+app.use('/user', usersController);
 //////////////////////////////////
 
 
