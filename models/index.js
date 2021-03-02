@@ -7,7 +7,7 @@ mongoose.connect(connectionString, {
     useUnifiedTopology: true,
     useCreateIndex: true,
 })
-    .then(() => console.log('MongoDB hella connected'))
+    .then(() => console.log('MongoDB hella connected ur buggin'))
     .catch((err) => console.log(err));
 
 module.exports = {

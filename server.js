@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+require('./models');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const cors = require('cors');
@@ -34,5 +35,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Local host is listening at ${PORT}`);
+    console.log(`Local host hella listening at ${PORT} deadass`);
 })
