@@ -7,4 +7,7 @@ router.get('/', controllers.posts.index)
 router.post('/', controllers.posts.create)
 // SHOW ONE
 router.get('/:postid', controllers.posts.show)
+// EDIT
+router.put('/:postid', controllers.posts.edit)
+
 module.exports = router;

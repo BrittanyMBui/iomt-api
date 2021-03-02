@@ -30,7 +30,8 @@ const create = (req, res) => {
             return console.log(err)
         }
 
-        db.User.findByIdAndUpdate(userId, 
+        db.User.findByIdAndUpdate(
+            userId, 
             { $push: 
                 {posts: newPost._id}
             }, (err, updatedUser) => {
@@ -44,8 +45,19 @@ const create = (req, res) => {
 
 // Edit Post
 const edit = (req, res) => {
-    
-}
+    const postId = req.params.postid;
+    db.Post.findByIdAndUpdate(
+        postId, 
+        req.body, 
+        { new: true },
+        (err, updatedPost) => {
+            if (err) {
+                return console.log(err)
+            }
+            res.json(updatedPost)
+        })
+};
+
 // Delete Post
 const destroy = (req, res) => {
 
