@@ -53,6 +53,9 @@ const login = (req, res) => {
     })
 };
 
+// USER LOGOUT
+
+// USER DESTROY
 
 module.exports = {
     signup,

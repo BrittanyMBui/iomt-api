@@ -44,9 +44,8 @@ const create = (req, res) => {
 
 // Edit Post
 const edit = (req, res) => {
-
+    
 }
-
 // Delete Post
 const destroy = (req, res) => {
 
