@@ -27,8 +27,8 @@ app.use(session({
     },
 }));
 // ROUTES
-app.use('/users', routes.users);
-app.use('/posts', routes.posts);
+app.use('/iomtapi/v1/users', routes.users);
+app.use('/iomtapi/v1/posts', routes.posts);
 //////////////////////////////////
 
 
