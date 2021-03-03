@@ -24,21 +24,21 @@ const show = (req, res) => {
 
 // Create Post
 const create = (req, res) => {
-    const userId = req.body.user;
+    // const userId = req.body.user;
     db.Post.create(req.body, (err, newPost) => {
         if (err) {
             return console.log(err)
         }
 
-        db.User.findByIdAndUpdate(
-            userId, 
-            { $push: 
-                {posts: newPost._id}
-            }, (err, updatedUser) => {
-            if (err) {
-                return console.log(err)
-            }
-        })
+        // db.User.findByIdAndUpdate(
+        //     userId, 
+        //     { $push: 
+        //         {posts: newPost._id}
+        //     }, (err, updatedUser) => {
+        //     if (err) {
+        //         return console.log(err)
+        //     }
+        // })
         res.json(newPost)
     })
 };

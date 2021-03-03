@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
 
+// Current Route = '/posts'
+
 // SHOW ALL
 router.get('/', controllers.posts.index)
 // CREATE
