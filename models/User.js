@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
-    Article: [{
+    articles: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Article'
     }]
