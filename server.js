@@ -17,7 +17,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // CORS
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 // SESSION
 app.use(session({
     secret: "secrets are no fun",
