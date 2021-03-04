@@ -12,11 +12,12 @@ const app = express();
 
 
 ////////////////////// MIDDLEWARE
-// CORS
-app.use(cors());
+
 // BODY-PARSER
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// CORS
+app.use(cors());
 // SESSION
 app.use(session({
     secret: "secrets are no fun",
@@ -39,5 +40,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Local host hella listening at ${PORT} deadass`);
+    console.log(`Local host listening at ${PORT}`);
 });
