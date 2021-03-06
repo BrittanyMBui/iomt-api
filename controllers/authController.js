@@ -34,6 +34,12 @@ async function login(req, res) {
     }
 };
 
+function verify(req, res) {
+    res.json({status: 200, userId: req.currentUserId})
+};
+
+
 module.exports = {
-    login
+    login,
+    verify
 }
