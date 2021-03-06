@@ -21,13 +21,13 @@ async function login(req, res) {
             return res.status(400).json({status: 400, error: 'Invalid email or password'})
         }
 
-        // const payload = { userId: foundUser._id };
-        // const secret = process.env.JWT_SECRET;
-        // const exp = { expiresIn: '30d' };
+        const payload = { userId: foundUser._id };
+        const secret = process.env.SECRET;
+        const exp = { expiresIn: '30d' };
 
-        // const token = await jwt.sign(payload, secret, exp);
+        const token = await jwt.sign(payload, secret, exp);
 
-        res.json(foundUser);
+        res.json({status: 200, token});
     } catch (err) {
         console.log(err)
         return res.status(500).json({status: 500, error: 'Something went wrong, please try again'});
