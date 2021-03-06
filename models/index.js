@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const connectionString = process.env.MONGODB_URI || 'mongodb://localhost:27017/iomt';
+const connectionString = process.env.MONGODB_URI;
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
@@ -13,5 +13,4 @@ mongoose.connect(connectionString, {
 module.exports = {
     User: require('./User'),
     Post: require('./Post'),
-    Article: require('./Article')
 };

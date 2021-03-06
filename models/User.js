@@ -19,11 +19,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post'
     }],
-    articles: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Article'
-    }]
-});
+}, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

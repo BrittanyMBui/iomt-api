@@ -30,15 +30,15 @@ const create = (req, res) => {
             return console.log(err)
         }
 
-        // db.User.findByIdAndUpdate(
-        //     userId, 
-        //     { $push: 
-        //         {posts: newPost._id}
-        //     }, (err, updatedUser) => {
-        //     if (err) {
-        //         return console.log(err)
-        //     }
-        // })
+        db.User.findByIdAndUpdate(
+            userId, 
+            { $push: 
+                {posts: newPost._id}
+            }, (err, updatedUser) => {
+            if (err) {
+                return console.log(err)
+            }
+        })
         res.json(newPost)
     })
 };
@@ -65,26 +65,20 @@ const destroy = (req, res) => {
         if (err) {
             return console.log(err)
         }
-        // db.User.findByIdAndUpdate(
-        //     userId, 
-        //     { $pull: 
-        //         { posts: deletedPost._id}
-        //     }, 
-        //     { new: true }, 
-        //     (err, updatedUser) => {
-        //         if (err) {
-        //             return console.log(err)
-        //         }
-        // })
+        db.User.findByIdAndUpdate(
+            userId, 
+            { $pull: 
+                { posts: deletedPost._id}
+            }, 
+            { new: true }, 
+            (err, updatedUser) => {
+                if (err) {
+                    return console.log(err)
+                }
+        })
         res.json(deletedPost)
     })
 };
-
-
-
-
-
-
 
 module.exports = {
     index,

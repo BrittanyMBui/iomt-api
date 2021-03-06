@@ -2,9 +2,7 @@ require('dotenv').config();
 const express = require('express');
 require('./models');
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const cors = require('cors');
-const controllers = require('./controllers');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 4000;
@@ -19,15 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // CORS
 app.use(cors({
     origin: 'http://localhost:3000'
-}));
-// SESSION
-app.use(session({
-    secret: "secrets are no fun",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 4,
-    },
 }));
 // ROUTES
 app.use('/iomtapi/v1/users', routes.users);
