@@ -23,7 +23,7 @@ async function login(req, res) {
 
         const payload = { userId: foundUser._id };
         const secret = process.env.JWT_SECRET;
-        const exp = { expiresIn: '3d' };
+        const exp = { expiresIn: '30d' };
 
         const token = await jwt.sign(payload, secret, exp);
 
