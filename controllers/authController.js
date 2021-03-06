@@ -27,7 +27,7 @@ async function login(req, res) {
 
         // const token = await jwt.sign(payload, secret, exp);
 
-        res.json(founduser);
+        res.json(foundUser);
     } catch (err) {
         console.log(err)
         return res.status(500).json({status: 500, error: 'Something went wrong, please try again'});
