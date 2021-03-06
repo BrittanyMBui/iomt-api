@@ -5,5 +5,7 @@ const controllers = require('../controllers');
 
 // CREATE
 router.post ('/', controllers.users.create);
+// PROFILE
+router.post('/profile', controllers.users.getProfile);
 
 module.exports = router;

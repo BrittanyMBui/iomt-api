@@ -21,6 +21,7 @@ app.use(cors({
 // ROUTES
 app.use('/iomtapi/v1/users', routes.users);
 app.use('/iomtapi/v1/posts', routes.posts);
+app.use('/iomtapi/v1/auth', routes.auth); 
 //////////////////////////////////
 
 

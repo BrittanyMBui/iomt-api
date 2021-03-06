@@ -1,4 +1,5 @@
 module.exports = {
     users: require('./usersController'),
-    posts: require('./postsController')
+    posts: require('./postsController'),
+    auth: require('./authController')
 };

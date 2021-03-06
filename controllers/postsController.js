@@ -24,7 +24,7 @@ const show = (req, res) => {
 
 // Create Post
 const create = (req, res) => {
-    // const userId = req.body.user;
+    const userId = req.body.user;
     db.Post.create(req.body, (err, newPost) => {
         if (err) {
             return console.log(err)

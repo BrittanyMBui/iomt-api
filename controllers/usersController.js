@@ -20,12 +20,22 @@ async function create(req, res) {
         const newUser = await db.User.create({...req.body, password: hashedPassword});
         res.json(newUser);
     } catch (err) {
+        console.log(err)
         return res.status(500).json({status: 500, error: 'Something went wrong, please try again'});
     }
 };
 
-
+async function getProfile(req, res) {
+    try {
+        const user = await db.User.findById(req.currentUserId);
+        return res.json({status: 200, profile: user})
+    } catch (err) {
+        console.log(err)
+        return res.status(500).json({status: 500, error: 'Something went wrong, please try again.'});
+    }
+}
 
 module.exports = {
     create,
+    getProfile
 };
