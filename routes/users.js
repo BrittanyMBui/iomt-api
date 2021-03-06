@@ -1,15 +1,9 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
 
-// Current Path = '/users'
+// Current Path = '/iomtapi/v1/users'
 
-// SIGNUP
-router.post ('/signup', controllers.users.signup);
+// CREATE
+router.post ('/', controllers.users.create);
 
-// LOGIN
-router.post ('/login', controllers.users.login);
-
-// LOGOUT
-
-// DELETE
 module.exports = router;

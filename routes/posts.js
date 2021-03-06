@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
 
-// Current Route = '/posts'
+// Current Route = '/iomtapi/v1/posts'
 
 // SHOW ALL
 router.get('/', controllers.posts.index)

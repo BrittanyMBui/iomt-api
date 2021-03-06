@@ -1,63 +1,31 @@
 const db = require('../models');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
-// - /users
+// CREATE USER
+async function create(req, res) {
+    const { username, email, password } = req.body;
 
-// USER SIGN-UP
-const signup = (req, res) => {
-    bcrypt.genSalt(10, (err, salt) => {
-        if (err) {
-            return console.log(err);
+    if(!username || !email || !password) {
+        return res.status(400).json({status: 400, message: 'All Fields Are Required'});
+    }
+
+    try {
+        const foundUser = await db.User.findOne({ email });
+        if (foundUser) {
+            console.log(`User exits at ${foundUser}`);
+            return res.status(400).json({status: 400, message: 'Email already in use'});
         }
-
-        bcrypt.hash(req.body.password, salt, (err, hashedPassword) => {
-            const newUser = {
-                username: req.body.username,
-                avatar: req.body.avatar,
-                email: req.body.email,
-                password: hashedPassword,
-            }
-
-            db.User.create(newUser, (err, createdUser) => {
-                if (err) throw err;
-                // req.session.user = createdUser;
-                res.json(createdUser);
-            })
-        })
-    })
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        const newUser = await db.User.create({...req.body, password: hashedPassword});
+        res.json(newUser);
+    } catch (err) {
+        return res.status(500).json({status: 500, error: 'Something went wrong, please try again'});
+    }
 };
 
-// USER LOGIN
-const login = (req, res) => {
-    db.User.findOne( { email: req.body.email }, (err, foundUser) => {
-        if (err) {
-            return console.log(err)
-        }
 
-        if (!foundUser) {
-            return res.send('User does not exist');
-        }
-
-        bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
-            if (err) {
-                console.log(err)
-            }
-
-            if (result) {
-                // req.session.user = foundUser;
-                res.json(foundUser);
-            } else {
-                res.send('invalid password');
-            }
-        })
-    })
-};
-
-// USER LOGOUT
-
-// USER DESTROY
 
 module.exports = {
-    signup,
-    login
+    create,
 };
