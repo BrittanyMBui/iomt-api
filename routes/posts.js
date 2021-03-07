@@ -1,10 +1,11 @@
 const router = require('express').Router();
 const controllers = require('../controllers');
+const auth = require('../middleware/auth');
 
 // Current Route = '/iomtapi/v1/posts'
 
 // SHOW ALL
-router.get('/', controllers.posts.index)
+router.get('/', auth, controllers.posts.index)
 // CREATE
 router.post('/', controllers.posts.create)
 // SHOW ONE

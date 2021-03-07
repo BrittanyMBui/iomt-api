@@ -4,12 +4,18 @@ const db = require('../models');
 
 // Show All Posts
 const index = (req, res) => {
-    db.Post.find({}, (err, allPosts) => {
+    db.User.findById(req.currentUserId).populate('posts').exec((err, foundUser) => {
         if (err) {
             return console.log(err)
         }
-        res.json(allPosts)
+        res.json(foundUser.posts)
     })
+    // db.Post.find({}, (err, allPosts) => {
+    //     if (err) {
+    //         return console.log(err)
+    //     }
+    //     res.json(allPosts)
+    // })
 };
 
 // Show One Post
