@@ -8,19 +8,35 @@ const index = (req, res) => {
         if (err) {
             return console.log(err)
         }
-        res.json(foundUser)
+        res.json(foundUser.posts)
     })
 };
 
 // Show One Post
 const show = (req, res) => {
-    db.Post.findById(req.params.postid, (err, foundPost) => {
+    db.User.findById(req.currentUserId, (err, foundUser) =>{
         if (err) {
-            return console.log(err);
+            return console.log(err)
         }
-        res.json(foundPost)
+        db.Post.findById(req.params.postid, (err, foundPost) => {
+            if (err) {
+                return console.log(err)
+            }
+            res.json(foundPost)
+        })
     })
-};
+}
+
+
+
+// const show = (req, res) => {
+//     db.Post.findById(req.params.postid, (err, foundPost) => {
+//         if (err) {
+//             return console.log(err);
+//         }
+//         res.json(foundPost)
+//     })
+// };
 
 // Create Post
 const create = (req, res) => {

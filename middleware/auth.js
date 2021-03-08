@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 async function auth(req, res, next) {
-    const { token } = req.body;
+    const token = req.headers.authorization.split(' ')[1];
 
     if (!token) {
         return res.status(400).json({status: 400, error: 'You are not authenticated. Please login and try again.'});
