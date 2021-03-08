@@ -23,9 +23,8 @@ async function login(req, res) {
 
         const payload = { userId: foundUser._id };
         const secret = process.env.SECRET;
-        const exp = { expiresIn: '30d' };
 
-        const token = await jwt.sign(payload, secret, exp);
+        const token = await jwt.sign(payload, secret);
 
         res.json({status: 200, token});
     } catch (err) {

@@ -8,14 +8,8 @@ const index = (req, res) => {
         if (err) {
             return console.log(err)
         }
-        res.json(foundUser.posts)
+        res.json(foundUser)
     })
-    // db.Post.find({}, (err, allPosts) => {
-    //     if (err) {
-    //         return console.log(err)
-    //     }
-    //     res.json(allPosts)
-    // })
 };
 
 // Show One Post
@@ -30,23 +24,46 @@ const show = (req, res) => {
 
 // Create Post
 const create = (req, res) => {
-    const userId = req.body.user;
-    db.Post.create(req.body, (err, newPost) => {
+    db.User.findById(req.currentUserId, (err, foundUser) => {
         if (err) {
             return console.log(err)
         }
+        const context = {
+            title: req.body.title,
+            body: req.body.body,
+            user: foundUser._id,
+        };
 
-        db.User.findByIdAndUpdate(
-            userId, 
-            { $push: 
-                {posts: newPost._id}
-            }, (err, updatedUser) => {
+        db.Post.create(context, (err, newPost) => {
             if (err) {
                 return console.log(err)
             }
+            foundUser.posts.push(newPost);
+            foundUser.save((err, savedUser) => {
+                if (err) {
+                    return console.log(err)
+                }
+            })
+            res.json(newPost);
         })
-        res.json(newPost)
     })
+    // const userId = req.body.currentUserId;
+    // db.Post.create(req.body, (err, newPost) => {
+    //     if (err) {
+    //         return console.log(err)
+    //     }
+
+    //     db.User.findByIdAndUpdate(
+    //         userId, 
+    //         { $push: 
+    //             {posts: newPost._id}
+    //         }, (err, updatedUser) => {
+    //         if (err) {
+    //             return console.log(err)
+    //         }
+    //     })
+    //     res.json(newPost)
+    // })
 };
 
 // Edit Post

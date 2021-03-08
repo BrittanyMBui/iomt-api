@@ -5,9 +5,9 @@ const auth = require('../middleware/auth');
 // Current Route = '/iomtapi/v1/posts'
 
 // SHOW ALL
-router.get('/', auth, controllers.posts.index)
+router.get('/', controllers.posts.index)
 // CREATE
-router.post('/', controllers.posts.create)
+router.post('/', auth, controllers.posts.create)
 // SHOW ONE
 router.get('/:postid', controllers.posts.show)
 // EDIT

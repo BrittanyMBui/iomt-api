@@ -35,7 +35,24 @@ async function getProfile(req, res) {
     }
 }
 
+const deleteUser = (req, res) => {
+    db.User.findByIdAndDelete(req.currentUserId, (err, deletedUser) => {
+        if (err) {
+            return console.log(err)
+        }
+
+        db.Post.deleteMany({ user: deletedUser._id }, (err, deletedPosts) => {
+            if (err) {
+                return console.log(err)
+            }
+        })
+
+        res.json(deletedUser)
+    })
+}
+
 module.exports = {
     create,
-    getProfile
+    getProfile,
+    deleteUser
 };
