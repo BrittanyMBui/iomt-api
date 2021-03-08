@@ -27,17 +27,6 @@ const show = (req, res) => {
     })
 }
 
-
-
-// const show = (req, res) => {
-//     db.Post.findById(req.params.postid, (err, foundPost) => {
-//         if (err) {
-//             return console.log(err);
-//         }
-//         res.json(foundPost)
-//     })
-// };
-
 // Create Post
 const create = (req, res) => {
     db.User.findById(req.currentUserId, (err, foundUser) => {
@@ -63,23 +52,6 @@ const create = (req, res) => {
             res.json(newPost);
         })
     })
-    // const userId = req.body.currentUserId;
-    // db.Post.create(req.body, (err, newPost) => {
-    //     if (err) {
-    //         return console.log(err)
-    //     }
-
-    //     db.User.findByIdAndUpdate(
-    //         userId, 
-    //         { $push: 
-    //             {posts: newPost._id}
-    //         }, (err, updatedUser) => {
-    //         if (err) {
-    //             return console.log(err)
-    //         }
-    //     })
-    //     res.json(newPost)
-    // })
 };
 
 // Edit Post
@@ -99,13 +71,12 @@ const edit = (req, res) => {
 // Delete Post
 const destroy = (req, res) => {
     const postId = req.params.postid;
-    // const userId = req.body.userid;
     db.Post.findByIdAndDelete(postId, (err, deletedPost) => {
         if (err) {
             return console.log(err)
         }
         db.User.findByIdAndUpdate(
-            userId, 
+            req.currentUserId, 
             { $pull: 
                 { posts: deletedPost._id}
             }, 
