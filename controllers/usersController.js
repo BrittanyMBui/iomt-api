@@ -1,5 +1,6 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 // CREATE USER
 async function create(req, res) {
@@ -12,13 +13,18 @@ async function create(req, res) {
     try {
         const foundUser = await db.User.findOne({ email });
         if (foundUser) {
-            console.log(`User exits at ${foundUser}`);
+            console.log(`User exists at ${foundUser}`);
             return res.status(400).json({status: 400, message: 'Email already in use'});
         }
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
         const newUser = await db.User.create({...req.body, password: hashedPassword});
-        res.json(newUser);
+
+        const payload = { userId: newUser._id };
+        const secret = process.env.SECRET;
+        const token = await jwt.sign(payload, secret);
+
+        res.json({status: 200, token});
     } catch (err) {
         console.log(err)
         return res.status(500).json({status: 500, error: 'Something went wrong, please try again'});
