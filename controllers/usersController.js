@@ -22,7 +22,8 @@ async function create(req, res) {
 
         const payload = { userId: newUser._id };
         const secret = process.env.SECRET;
-        const token = await jwt.sign(payload, secret);
+        const exp = {expiresIn: '1d'}; 
+        const token = await jwt.sign(payload, secret, exp);
 
         res.json({status: 200, token});
     } catch (err) {
